@@ -3,8 +3,8 @@ const background = document.querySelector('.background')
 let isJumping = false
 let position = 0
 let audios = {
-    jumping: 'bipUp.wav',
-    overAudio: 'gameOver.wav'
+    jumping: 'audios/bipUp.wav',
+    overAudio: 'audios/gameOver.wav'
 };
 
 function handleKeyUp(event) {   
@@ -49,7 +49,7 @@ function jump() {
 }
 
 function createCactus () {
-    const cactus = document.createElement ('div')
+    let cactus = document.createElement ('div')
     let cactusPosition = 1200
     let randomTime = Math.random () * 6000
 
@@ -58,26 +58,26 @@ function createCactus () {
     background.appendChild(cactus)
 
     let leftInterval = setInterval (() => {
-     
+    
      if (cactusPosition < -50) {
-         clearInterval(leftInterval)
-         background.removeChild(cactus)
-         
+        clearInterval(leftInterval)
+        background.removeChild(cactus)
+        
      } else if (cactusPosition > 0 && cactusPosition < 60 && position < 60){
-         // game over
+        // game over
         playAudio('overAudio')
         clearInterval(leftInterval)
-        document.body.innerHTML = '<h1 class="game-over"> Fim de jogo</h1>'
-  
+        document.body.innerHTML = '<h1 class=" game-over"> Fim de jogo</h1>'
+    
      } else {
         cactusPosition -= 10
         cactus.style.left = cactusPosition + 'px'
-     } 
+     }
     }, 20)
 
     setTimeout (createCactus, randomTime)
 }
 
-createCactus() 
+createCactus()
 document.addEventListener('keydown', handleKeyUp)
 
